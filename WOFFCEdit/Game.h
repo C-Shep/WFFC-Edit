@@ -78,6 +78,8 @@ private:
 	DirectX::SimpleMath::Vector3		m_camLookAt;
 	DirectX::SimpleMath::Vector3		m_camLookDirection;
 	DirectX::SimpleMath::Vector3		m_camRight;
+	DirectX::SimpleMath::Vector3		m_camUp;
+	DirectX::SimpleMath::Vector2		m_lastMousePos;
 	float m_camRotRate;
 
 	//control variables

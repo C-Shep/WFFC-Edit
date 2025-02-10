@@ -49,6 +49,10 @@ Game::Game()
 	m_camRight.y = 0.0f;
 	m_camRight.z = 0.0f;
 
+	m_camUp.x = 0.0f;
+	m_camUp.y = 0.0f;
+	m_camUp.z = 0.0f;
+
 	m_camOrientation.x = 0.0f;
 	m_camOrientation.y = 0.0f;
 	m_camOrientation.z = 0.0f;
@@ -154,6 +158,10 @@ void Game::Update(DX::StepTimer const& timer)
 		m_camOrientation.y += m_camRotRate;
 	}
 
+	Mouse::State mouseState = m_mouse->GetState();
+
+	m_camOrientation.y -= (mouseState.x - m_lastMousePos.x);
+
 	//create look direction from Euler angles in m_camOrientation
 	m_camLookDirection.x = sin((m_camOrientation.y)*3.1415 / 180);
 	m_camLookDirection.z = cos((m_camOrientation.y)*3.1415 / 180);
@@ -161,6 +169,10 @@ void Game::Update(DX::StepTimer const& timer)
 
 	//create right vector from look Direction
 	m_camLookDirection.Cross(Vector3::UnitY, m_camRight);
+
+	//create up vector from look Direction
+	//m_camPosition.Cross(Vector3::UnitX, m_camUp);
+	m_camUp = Vector3(0.f, 1.f, 0.f);// XMVector3Cross(m_camLookDirection, Vector3(0, 0, 1));
 
 	//process input and update stuff
 	if (m_InputCommands.forward)
@@ -179,6 +191,18 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		m_camPosition -= m_camRight*m_movespeed;
 	}
+	if (m_InputCommands.up)
+	{
+		m_camPosition += m_camUp * m_movespeed;
+	}
+	if (m_InputCommands.down)
+	{
+		m_camPosition -= m_camUp * m_movespeed;
+	}
+
+	//save last mouse postitu9okjb
+	m_lastMousePos.x = mouseState.x;
+	m_lastMousePos.y = mouseState.y;
 
 	//update lookat point
 	m_camLookAt = m_camPosition + m_camLookDirection;
@@ -245,7 +269,7 @@ void Game::Render()
 	//CAMERA POSITION ON HUD
 	m_sprites->Begin();
 	WCHAR   Buffer[256];
-	std::wstring var = L"Cam X: " + std::to_wstring(m_camPosition.x) + L"Cam Z: " + std::to_wstring(m_camPosition.z);
+	std::wstring var = L"Cam X: " + std::to_wstring(m_camPosition.x) + L" Cam Y: " + std::to_wstring(m_camLookDirection.x) + L" Cam Z: " + std::to_wstring(m_camPosition.z);
 	m_font->DrawString(m_sprites.get(), var.c_str() , XMFLOAT2(100, 10), Colors::Yellow);
 	m_sprites->End();
 

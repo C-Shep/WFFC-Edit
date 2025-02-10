@@ -18,6 +18,8 @@ ToolMain::ToolMain()
 	m_toolInputCommands.back		= false;
 	m_toolInputCommands.left		= false;
 	m_toolInputCommands.right		= false;
+	m_toolInputCommands.up			= false;
+	m_toolInputCommands.down		= false;
 	
 }
 
@@ -306,9 +308,16 @@ void ToolMain::UpdateInput(MSG * msg)
 		break;
 
 	case WM_MOUSEMOVE:
+		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
 		break;
 
 	case WM_LBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too
+		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
+		//set some flag for the mouse button in inputcommands
+		break;
+
+	case WM_RBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too
+		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
 		//set some flag for the mouse button in inputcommands
 		break;
 
@@ -337,6 +346,18 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.right = true;
 	}
 	else m_toolInputCommands.right = false;
+
+	if (m_keyArray[32])
+	{
+		m_toolInputCommands.up = true;
+	}
+	else m_toolInputCommands.up = false;
+
+	if (m_keyArray[17])
+	{
+		m_toolInputCommands.down = true;
+	}
+	else m_toolInputCommands.down = false;
 	//rotation
 	if (m_keyArray['E'])
 	{
