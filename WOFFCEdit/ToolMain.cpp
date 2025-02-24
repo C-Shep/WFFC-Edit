@@ -20,6 +20,11 @@ ToolMain::ToolMain()
 	m_toolInputCommands.right		= false;
 	m_toolInputCommands.up			= false;
 	m_toolInputCommands.down		= false;
+	m_toolInputCommands.mouseX		= 0.f;
+	m_toolInputCommands.mouseY		= 0.f;
+	m_toolInputCommands.mouseLBDown	= false;
+
+	
 	
 }
 
@@ -289,6 +294,12 @@ void ToolMain::Tick(MSG *msg)
 		//add to scenegraph
 		//resend scenegraph to Direct X renderer
 
+	if (m_toolInputCommands.mouseLBDown)
+	{
+		m_selectedObject = m_d3dRenderer.MousePicking();
+		m_toolInputCommands.mouseLBDown = false;
+	}
+
 	//Renderer Update Call
 	m_d3dRenderer.Tick(&m_toolInputCommands);
 }
@@ -308,12 +319,18 @@ void ToolMain::UpdateInput(MSG * msg)
 		break;
 
 	case WM_MOUSEMOVE:
-		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
+		//DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
+
+		m_toolInputCommands.mouseX = GET_X_LPARAM(msg->lParam);
+		m_toolInputCommands.mouseY = GET_Y_LPARAM(msg->lParam);
+
 		break;
 
 	case WM_LBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too
-		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
+		//DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
 		//set some flag for the mouse button in inputcommands
+
+		m_toolInputCommands.mouseLBDown = true;
 		break;
 
 	case WM_RBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too

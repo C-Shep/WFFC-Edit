@@ -14,4 +14,5 @@ struct InputCommands
 	DirectX::SimpleMath::Vector2 mouseMove;
 	float mouseX;
 	float mouseY;
+	bool mouseLBDown;
 };
