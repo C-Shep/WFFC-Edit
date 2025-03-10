@@ -53,6 +53,13 @@ public:
 
 	//Mouse
 	int MousePicking();
+	int selectedID;
+
+	//Copy Paste
+	void CopyObject();
+	void PasteObject();
+
+	DisplayObject copiedObject;
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

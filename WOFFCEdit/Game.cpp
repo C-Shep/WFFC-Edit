@@ -14,7 +14,6 @@ using namespace DirectX::SimpleMath;
 using Microsoft::WRL::ComPtr;
 
 Game::Game()
-
 {
     m_deviceResources = std::make_unique<DX::DeviceResources>();
     m_deviceResources->RegisterDeviceNotify(this);
@@ -58,7 +57,7 @@ Game::Game()
 	m_camOrientation.z = 0.0f;
 
 
-
+	selectedID = -1;
 }
 
 Game::~Game()
@@ -513,7 +512,7 @@ void Game::SaveDisplayChunk(ChunkObject * SceneChunk)
 int Game::MousePicking()
 {
 
-	int selectedID = -1;
+	selectedID = -1;
 	float pickedDistance = 0;
 	float lastPickedDistance = 9999.f;
 
@@ -561,13 +560,33 @@ int Game::MousePicking()
 				}
 				lastPickedDistance = pickedDistance;
 
-				
 			}
 		}
 	}
 
 	//if we got a hit.  return it. 
 	return selectedID;
+}
+
+void Game::CopyObject()
+{
+	//Loop through entire display list of objects and pick with each in turn. 
+	for (int i = 0; i < m_displayList.size(); i++)
+	{
+		if (i == selectedID)
+		{
+			copiedObject = m_displayList[i];
+		}
+	}
+}
+
+void Game::PasteObject()
+{
+	DisplayObject* newObject = new DisplayObject;
+	newObject->m_position = copiedObject.m_position;
+	newObject->m_scale = copiedObject.m_scale;
+	newObject->m_model = copiedObject.m_model;
+	newObject->m_render = copiedObject.m_render;
 }
 
 #ifdef DXTK_AUDIO

@@ -300,6 +300,18 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.mouseLBDown = false;
 	}
 
+	if (m_selectedObject != -1 && m_toolInputCommands.copyPressed)
+	{
+		m_d3dRenderer.CopyObject();
+		m_toolInputCommands.copyPressed = false;
+	}
+
+	if (m_toolInputCommands.pastePressed)
+	{
+		m_d3dRenderer.PasteObject();
+		m_toolInputCommands.pastePressed = false;
+	}
+
 	//Renderer Update Call
 	m_d3dRenderer.Tick(&m_toolInputCommands);
 }
@@ -339,7 +351,7 @@ void ToolMain::UpdateInput(MSG * msg)
 		break;
 
 	}
-	//here we update all the actual app functionality that we want.  This information will either be used int toolmain, or sent down to the renderer (Camera movement etc
+	//here we update all the actual app functionality that we want.  This information will either be used in toolmain, or sent down to the renderer (Camera movement etc)
 	//WASD movement
 	if (m_keyArray['W'])
 	{
@@ -364,28 +376,42 @@ void ToolMain::UpdateInput(MSG * msg)
 	}
 	else m_toolInputCommands.right = false;
 
-	if (m_keyArray[32])
+	//Up and Down with Space and Ctrl
+	if (m_keyArray[32] && !m_keyArray[17])
 	{
 		m_toolInputCommands.up = true;
 	}
 	else m_toolInputCommands.up = false;
 
-	if (m_keyArray[17])
+	if (m_keyArray[32] && m_keyArray[17])
 	{
 		m_toolInputCommands.down = true;
 	}
 	else m_toolInputCommands.down = false;
-	//rotation
+
+	//Rotation with Q and E
 	if (m_keyArray['E'])
 	{
 		m_toolInputCommands.rotRight = true;
 	}
 	else m_toolInputCommands.rotRight = false;
+
 	if (m_keyArray['Q'])
 	{
 		m_toolInputCommands.rotLeft = true;
 	}
 	else m_toolInputCommands.rotLeft = false;
 
-	//WASD
+	//Copy
+	if (m_keyArray[17] && m_keyArray['C'])
+	{
+		m_toolInputCommands.copyPressed = true;
+	}
+	else m_toolInputCommands.copyPressed = false;
+
+	if (m_keyArray[17] && m_keyArray['V'])
+	{
+		m_toolInputCommands.pastePressed = true;
+	}
+	else m_toolInputCommands.pastePressed = false;
 }
