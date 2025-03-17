@@ -18,4 +18,5 @@ struct InputCommands
 	bool mouseRBDown;
 	bool copyPressed;
 	bool pastePressed;
+	bool delPressed;
 };

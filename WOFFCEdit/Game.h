@@ -13,6 +13,7 @@
 #include "InputCommands.h"
 #include <vector>
 
+class ToolMain;
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -24,7 +25,7 @@ public:
 	~Game();
 
 	// Initialization and management
-	void Initialize(HWND window, int width, int height);
+	void Initialize(HWND window, int width, int height, ToolMain* newToolMain);
 	void SetGridState(bool state);
 
 	// Basic game loop
@@ -56,10 +57,11 @@ public:
 	int selectedID;
 
 	//Copy Paste
-	void CopyObject();
-	void PasteObject();
+	void CopyObject(const std::vector<SceneObject>* sceneGraph);
+	void PasteObject(std::vector<SceneObject>* sceneGraph);
+	void DeleteObject(std::vector<SceneObject>* sceneGraph);
 
-	DisplayObject copiedObject;
+	SceneObject copiedObject;
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();
@@ -80,6 +82,7 @@ private:
 	std::vector<DisplayObject>			m_displayList;
 	DisplayChunk						m_displayChunk;
 	InputCommands						m_InputCommands;
+	ToolMain* toolMain;
 
 	//functionality
 	float								m_movespeed;

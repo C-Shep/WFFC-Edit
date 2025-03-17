@@ -7,7 +7,6 @@
 #include "DisplayObject.h"
 #include <string>
 
-
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
@@ -56,7 +55,6 @@ Game::Game()
 	m_camOrientation.y = 0.0f;
 	m_camOrientation.z = 0.0f;
 
-
 	selectedID = -1;
 }
 
@@ -72,8 +70,10 @@ Game::~Game()
 }
 
 // Initialize the Direct3D resources required to run.
-void Game::Initialize(HWND window, int width, int height)
+void Game::Initialize(HWND window, int width, int height, ToolMain* newToolMain)
 {
+	toolMain = newToolMain;
+
     m_gamePad = std::make_unique<GamePad>();
 
     m_keyboard = std::make_unique<Keyboard>();
@@ -163,7 +163,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 	Mouse::State mouseState = m_mouse->GetState();
 
-	m_camOrientation.y -= (mouseState.x - m_lastMousePos.x);
+	m_camOrientation.y += (mouseState.x - m_lastMousePos.x);
 
 	//create look direction from Euler angles in m_camOrientation
 	m_camLookDirection.x = sin((m_camOrientation.y)*3.1415 / 180);
@@ -568,25 +568,31 @@ int Game::MousePicking()
 	return selectedID;
 }
 
-void Game::CopyObject()
+void Game::CopyObject(const std::vector<SceneObject>* sceneGraph)
 {
-	//Loop through entire display list of objects and pick with each in turn. 
-	for (int i = 0; i < m_displayList.size(); i++)
+	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
-		if (i == selectedID)
-		{
-			copiedObject = m_displayList[i];
-		}
+		copiedObject = sceneGraph->at(selectedID);
 	}
 }
 
-void Game::PasteObject()
+void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 {
-	DisplayObject* newObject = new DisplayObject;
-	newObject->m_position = copiedObject.m_position;
-	newObject->m_scale = copiedObject.m_scale;
-	newObject->m_model = copiedObject.m_model;
-	newObject->m_render = copiedObject.m_render;
+	SceneObject newObject = copiedObject;
+	newObject.ID = sceneGraph->size()+1;
+	newObject.posY = newObject.posY + 3.f;
+	sceneGraph->push_back(newObject);
+}
+
+void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
+{
+	//SceneObject objectToDelete;
+	if (selectedID >= 0 && selectedID < sceneGraph->size())
+	{
+		//objectToDelete = sceneGraph->at(selectedID);
+		sceneGraph->erase(sceneGraph->begin()+selectedID);
+	}
+	selectedID = -2;
 }
 
 #ifdef DXTK_AUDIO

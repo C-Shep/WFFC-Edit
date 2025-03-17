@@ -23,9 +23,11 @@ ToolMain::ToolMain()
 	m_toolInputCommands.mouseX		= 0.f;
 	m_toolInputCommands.mouseY		= 0.f;
 	m_toolInputCommands.mouseLBDown	= false;
-
+	m_toolInputCommands.pastePressed = false;
+	m_toolInputCommands.copyPressed = false;
+	m_toolInputCommands.delPressed = false;
 	
-	
+	isPastingLast = false;
 }
 
 
@@ -47,7 +49,7 @@ void ToolMain::onActionInitialise(HWND handle, int width, int height)
 	m_width		= width;
 	m_height	= height;
 	
-	m_d3dRenderer.Initialize(handle, m_width, m_height);
+	m_d3dRenderer.Initialize(handle, m_width, m_height, this);
 
 	//database connection establish
 	int rc;
@@ -64,6 +66,14 @@ void ToolMain::onActionInitialise(HWND handle, int width, int height)
 	}
 
 	onActionLoad();
+}
+
+void ToolMain::renderDisplayList()
+{
+	//Process REsults into renderable
+	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
+	//build the renderable chunk 
+	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
 }
 
 void ToolMain::onActionLoad()
@@ -183,10 +193,7 @@ void ToolMain::onActionLoad()
 	m_chunk.tex_splat_4_tiling = sqlite3_column_int(pResultsChunk, 18);
 
 
-	//Process REsults into renderable
-	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
-	//build the renderable chunk 
-	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
+	renderDisplayList();
 
 }
 
@@ -286,6 +293,8 @@ void ToolMain::onActionSaveTerrain()
 
 void ToolMain::Tick(MSG *msg)
 {
+
+
 	//do we have a selection
 	//do we have a mode
 	//are we clicking / dragging /releasing
@@ -300,16 +309,27 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.mouseLBDown = false;
 	}
 
-	if (m_selectedObject != -1 && m_toolInputCommands.copyPressed)
+	if (m_selectedObject != -1 && m_toolInputCommands.copyPressed && isCopyingLast == false)
 	{
-		m_d3dRenderer.CopyObject();
+		isCopyingLast = true;
+		m_d3dRenderer.CopyObject(&m_sceneGraph);
 		m_toolInputCommands.copyPressed = false;
 	}
 
-	if (m_toolInputCommands.pastePressed)
+	if (m_toolInputCommands.pastePressed && isPastingLast == false)
 	{
-		m_d3dRenderer.PasteObject();
+		isPastingLast = true;
+		m_d3dRenderer.PasteObject(&m_sceneGraph);
+		renderDisplayList();
 		m_toolInputCommands.pastePressed = false;
+	}
+
+	if (m_toolInputCommands.delPressed && isDeletingLast == false)
+	{
+		isDeletingLast = true;
+		m_d3dRenderer.DeleteObject(&m_sceneGraph);
+		renderDisplayList();
+		m_toolInputCommands.delPressed = false;
 	}
 
 	//Renderer Update Call
@@ -407,11 +427,28 @@ void ToolMain::UpdateInput(MSG * msg)
 	{
 		m_toolInputCommands.copyPressed = true;
 	}
-	else m_toolInputCommands.copyPressed = false;
+	else {
+		m_toolInputCommands.copyPressed = false;
+		isCopyingLast = false;
+	}
 
 	if (m_keyArray[17] && m_keyArray['V'])
 	{
 		m_toolInputCommands.pastePressed = true;
 	}
-	else m_toolInputCommands.pastePressed = false;
+	else {
+		m_toolInputCommands.pastePressed = false;
+		isPastingLast = false;
+	}
+
+	//Delete
+	if (m_keyArray[127] || m_keyArray[8])
+	{
+		m_toolInputCommands.delPressed = true;
+	}
+	else {
+		m_toolInputCommands.delPressed = false;
+		isDeletingLast = false;
+	}
 }
+

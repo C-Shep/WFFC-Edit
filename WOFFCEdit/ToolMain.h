@@ -30,12 +30,11 @@ public:	//variables
 	std::vector<SceneObject>    m_sceneGraph;	//our scenegraph storing all the objects in the current chunk
 	ChunkObject					m_chunk;		//our landscape chunk
 	int m_selectedObject;						//ID of current Selection
+	void	renderDisplayList();				//this is totally a variable, display objects
 
 private:	//methods
 	void	onContentAdded();
 
-
-		
 private:	//variables
 	HWND	m_toolHandle;		//Handle to the  window
 	Game	m_d3dRenderer;		//Instance of D3D rendering system for our tool
@@ -49,6 +48,8 @@ private:	//variables
 	int m_height;
 	int m_currentChunk;			//the current chunk of thedatabase that we are operating on.  Dictates loading and saving. 
 	
-
+	bool isCopyingLast;
+	bool isPastingLast;
+	bool isDeletingLast;
 	
 };
