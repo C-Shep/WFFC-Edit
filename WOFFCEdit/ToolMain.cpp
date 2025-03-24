@@ -303,6 +303,9 @@ void ToolMain::Tick(MSG *msg)
 		//add to scenegraph
 		//resend scenegraph to Direct X renderer
 
+			//lock mouse to screen
+
+
 	if (m_toolInputCommands.mouseLBDown)
 	{
 		m_selectedObject = m_d3dRenderer.MousePicking();
@@ -368,8 +371,20 @@ void ToolMain::UpdateInput(MSG * msg)
 	case WM_RBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too
 		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
 		//set some flag for the mouse button in inputcommands
-		break;
 
+		//lock mouse to screen
+	//	RECT rect;
+	//	GetWindowRect(msg->hwnd, &rect);
+	//	SetCursorPos(rect.right / 2, rect.bottom / 2);
+
+		m_toolInputCommands.mouseRBDown = true;
+		break;
+	case WM_RBUTTONUP:
+		DirectX::Mouse::ProcessMessage(msg->message, msg->wParam, msg->lParam);
+		//set some flag for the mouse button in inputcommands
+		
+		m_toolInputCommands.mouseRBDown = false;
+		break;
 	}
 	//here we update all the actual app functionality that we want.  This information will either be used in toolmain, or sent down to the renderer (Camera movement etc)
 	//WASD movement
@@ -421,6 +436,18 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.rotLeft = true;
 	}
 	else m_toolInputCommands.rotLeft = false;
+
+	if (m_keyArray['Z'])
+	{
+		m_toolInputCommands.rotUp = true;
+	}
+	else m_toolInputCommands.rotUp = false;
+
+	if (m_keyArray['X'])
+	{
+		m_toolInputCommands.rotDown = true;
+	}
+	else m_toolInputCommands.rotDown = false;
 
 	//Copy
 	if (m_keyArray[17] && m_keyArray['C'])

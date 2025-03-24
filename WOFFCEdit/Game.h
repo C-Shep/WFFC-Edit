@@ -11,6 +11,7 @@
 #include "DisplayChunk.h"
 #include "ChunkObject.h"
 #include "InputCommands.h"
+#include "Camera.h"
 #include <vector>
 
 class ToolMain;
@@ -62,6 +63,10 @@ public:
 	void DeleteObject(std::vector<SceneObject>* sceneGraph);
 
 	SceneObject copiedObject;
+	bool hasCopiedAnObject;
+	float pasteExtraSpace;
+
+
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();
@@ -84,10 +89,14 @@ private:
 	InputCommands						m_InputCommands;
 	ToolMain* toolMain;
 
+
+
 	//functionality
 	float								m_movespeed;
 
 	//camera
+	Camera								cam;
+	HWND								cameraWindow;
 	DirectX::SimpleMath::Vector3		m_camPosition;
 	DirectX::SimpleMath::Vector3		m_camOrientation;
 	DirectX::SimpleMath::Vector3		m_camLookAt;

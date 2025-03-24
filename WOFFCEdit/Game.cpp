@@ -56,6 +56,9 @@ Game::Game()
 	m_camOrientation.z = 0.0f;
 
 	selectedID = -1;
+
+	hasCopiedAnObject = false;
+	pasteExtraSpace = 3.f;
 }
 
 Game::~Game()
@@ -90,6 +93,8 @@ void Game::Initialize(HWND window, int width, int height, ToolMain* newToolMain)
     CreateWindowSizeDependentResources();
 
 	GetClientRect(window,&m_screenDimensions);
+
+	cameraWindow = window;
 
 #ifdef DXTK_AUDIO
     // Create DirectXTK for Audio objects
@@ -147,71 +152,11 @@ void Game::Tick(InputCommands *Input)
 // Updates the world.
 void Game::Update(DX::StepTimer const& timer)
 {
-	//TODO  any more complex than this, and the camera should be abstracted out to somewhere else
-	//camera motion is on a plane, so kill the 7 component of the look direction
-	Vector3 planarMotionVector = m_camLookDirection;
-	planarMotionVector.y = 0.0;
-
-	if (m_InputCommands.rotRight)
-	{
-		m_camOrientation.y -= m_camRotRate;
-	}
-	if (m_InputCommands.rotLeft)
-	{
-		m_camOrientation.y += m_camRotRate;
-	}
-
-	Mouse::State mouseState = m_mouse->GetState();
-
-	m_camOrientation.y += (mouseState.x - m_lastMousePos.x);
-
-	//create look direction from Euler angles in m_camOrientation
-	m_camLookDirection.x = sin((m_camOrientation.y)*3.1415 / 180);
-	m_camLookDirection.z = cos((m_camOrientation.y)*3.1415 / 180);
-	m_camLookDirection.Normalize();
-
-	//create right vector from look Direction
-	m_camLookDirection.Cross(Vector3::UnitY, m_camRight);
-
-	//create up vector from look Direction
-	//m_camPosition.Cross(Vector3::UnitX, m_camUp);
-	m_camUp = Vector3(0.f, 1.f, 0.f);// XMVector3Cross(m_camLookDirection, Vector3(0, 0, 1));
-
-	//process input and update stuff
-	if (m_InputCommands.forward)
-	{	
-		m_camPosition += m_camLookDirection*m_movespeed;
-	}
-	if (m_InputCommands.back)
-	{
-		m_camPosition -= m_camLookDirection*m_movespeed;
-	}
-	if (m_InputCommands.right)
-	{
-		m_camPosition += m_camRight*m_movespeed;
-	}
-	if (m_InputCommands.left)
-	{
-		m_camPosition -= m_camRight*m_movespeed;
-	}
-	if (m_InputCommands.up)
-	{
-		m_camPosition += m_camUp * m_movespeed;
-	}
-	if (m_InputCommands.down)
-	{
-		m_camPosition -= m_camUp * m_movespeed;
-	}
-
-	//save last mouse postitu9okjb
-	m_lastMousePos.x = mouseState.x;
-	m_lastMousePos.y = mouseState.y;
-
-	//update lookat point
-	m_camLookAt = m_camPosition + m_camLookDirection;
+	//Camera
+	cam.Update(&m_InputCommands);
 
 	//apply camera vectors
-    m_view = Matrix::CreateLookAt(m_camPosition, m_camLookAt, Vector3::UnitY);
+    m_view = Matrix::CreateLookAt(cam.GetPosition(), cam.GetLookAt(), cam.GetUpVector());
 
     m_batchEffect->SetView(m_view);
     m_batchEffect->SetWorld(Matrix::Identity);
@@ -431,7 +376,8 @@ void Game::BuildDisplayList(std::vector<SceneObject> * SceneGraph)
 		DisplayObject newDisplayObject;
 		
 		//load model
-		std::wstring modelwstr = StringToWCHART(SceneGraph->at(i).model_path);							//convect string to Wchar
+		std::wstring modelwstr = StringToWCHART(SceneGraph->at(i).model_path);			
+				//convect string to Wchar
 		newDisplayObject.m_model = Model::CreateFromCMO(device, modelwstr.c_str(), *m_fxFactory, true);	//get DXSDK to load model "False" for LH coordinate system (maya)
 
 		//Load Texture
@@ -534,7 +480,8 @@ int Game::MousePicking()
 		(
 			m_displayList[i].m_orientation.y * 3.1415 / 180,
 			m_displayList[i].m_orientation.x * 3.1415 / 180,
-			m_displayList[i].m_orientation.z * 3.1415 / 180);
+			m_displayList[i].m_orientation.z * 3.1415 / 180
+		);
 
 		//create set the matrix of the selected object in the world based on the translation, scale and rotation.
 		XMMATRIX local = m_world * XMMatrixTransformation(g_XMZero, Quaternion::Identity, scale, g_XMZero, rotate, translate);
@@ -573,15 +520,22 @@ void Game::CopyObject(const std::vector<SceneObject>* sceneGraph)
 	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
 		copiedObject = sceneGraph->at(selectedID);
+		hasCopiedAnObject = true;
+		pasteExtraSpace = 3.f;
 	}
 }
 
 void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 {
-	SceneObject newObject = copiedObject;
-	newObject.ID = sceneGraph->size()+1;
-	newObject.posY = newObject.posY + 3.f;
-	sceneGraph->push_back(newObject);
+	if (hasCopiedAnObject)
+	{
+		SceneObject newObject = copiedObject;
+		newObject.ID = sceneGraph->size() + 1;
+		newObject.posY = newObject.posY + pasteExtraSpace;
+		sceneGraph->push_back(newObject);
+		pasteExtraSpace += 3.f;
+	}
+
 }
 
 void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
@@ -592,7 +546,7 @@ void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
 		//objectToDelete = sceneGraph->at(selectedID);
 		sceneGraph->erase(sceneGraph->begin()+selectedID);
 	}
-	selectedID = -2;
+	selectedID = -2; //the ground is -1 so -2 to be safe
 }
 
 #ifdef DXTK_AUDIO
