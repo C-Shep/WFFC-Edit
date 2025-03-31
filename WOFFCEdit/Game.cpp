@@ -59,6 +59,9 @@ Game::Game()
 
 	hasCopiedAnObject = false;
 	pasteExtraSpace = 3.f;
+
+	hasUndoableObjectDelete = false;
+	hasUndoableObjectCreate = false;
 }
 
 Game::~Game()
@@ -532,8 +535,14 @@ void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 		SceneObject newObject = copiedObject;
 		newObject.ID = sceneGraph->size() + 1;
 		newObject.posY = newObject.posY + pasteExtraSpace;
+
 		sceneGraph->push_back(newObject);
+		undoObject.push_back(newObject);
+		undoActions.push_back(1);
+
 		pasteExtraSpace += 3.f;
+		hasUndoableObjectCreate = true;
+		hasUndoableObjectDelete = false;
 	}
 
 }
@@ -543,10 +552,61 @@ void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
 	//SceneObject objectToDelete;
 	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
+		undoObject.push_back(sceneGraph->at(selectedID));
+		undoActions.push_back(0);
+		hasUndoableObjectDelete = true;
+		hasUndoableObjectCreate = false;
 		//objectToDelete = sceneGraph->at(selectedID);
 		sceneGraph->erase(sceneGraph->begin()+selectedID);
 	}
 	selectedID = -2; //the ground is -1 so -2 to be safe
+}
+
+void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
+{
+	//if last action was delete, undo delete and create object
+	if (!undoActions.empty())
+	{
+		if (undoActions.back() == 0)
+		{
+			SceneObject newObject = undoObject.back();
+			sceneGraph->push_back(newObject);
+
+			undoObject.pop_back();
+			undoActions.pop_back();
+		}
+		//if last action was create, undo create and delete object
+		else if (undoActions.back() == 1) {
+			int deleteID = undoObject.back().ID;
+
+			for (int i = 0; i < sceneGraph->size();i++)
+			{
+				if (sceneGraph->at(i).ID == deleteID)
+				{
+					sceneGraph->erase(sceneGraph->begin() + i);
+				}
+			}
+
+			
+
+			undoObject.pop_back();
+			undoActions.pop_back();
+		}
+	}
+}
+
+int Game::GetNewID(std::vector<SceneObject>* sceneGraph)
+{
+//	int currentID;
+//	std::vector<int> usedIDs;
+//	for (int i = 0; i < sceneGraph->size();i++)
+//	{
+//		if (sceneGraph->at(i).ID == i)
+//		{
+//			usedIDs 
+//		}
+//	 }
+//	return 0;
 }
 
 #ifdef DXTK_AUDIO

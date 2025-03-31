@@ -23,4 +23,5 @@ struct InputCommands
 	bool copyPressed;
 	bool pastePressed;
 	bool delPressed;
+	bool undoPressed;
 };

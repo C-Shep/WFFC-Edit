@@ -61,12 +61,19 @@ public:
 	void CopyObject(const std::vector<SceneObject>* sceneGraph);
 	void PasteObject(std::vector<SceneObject>* sceneGraph);
 	void DeleteObject(std::vector<SceneObject>* sceneGraph);
+	void UndoObject(std::vector<SceneObject>* sceneGraph);
+
+	int GetNewID(std::vector<SceneObject>* sceneGraph);
 
 	SceneObject copiedObject;
 	bool hasCopiedAnObject;
 	float pasteExtraSpace;
 
+	std::vector<SceneObject> undoObject;
+	std::vector<int> undoActions;		//0 = delete, 1 = create
 
+	bool hasUndoableObjectDelete;
+	bool hasUndoableObjectCreate;
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

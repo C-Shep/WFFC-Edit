@@ -51,5 +51,6 @@ private:	//variables
 	bool isCopyingLast;
 	bool isPastingLast;
 	bool isDeletingLast;
+	bool isUndoingLast;
 	
 };

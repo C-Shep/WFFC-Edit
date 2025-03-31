@@ -26,8 +26,10 @@ ToolMain::ToolMain()
 	m_toolInputCommands.pastePressed = false;
 	m_toolInputCommands.copyPressed = false;
 	m_toolInputCommands.delPressed = false;
+	m_toolInputCommands.undoPressed = false;
 	
 	isPastingLast = false;
+	isUndoingLast = false;
 }
 
 
@@ -193,7 +195,10 @@ void ToolMain::onActionLoad()
 	m_chunk.tex_splat_4_tiling = sqlite3_column_int(pResultsChunk, 18);
 
 
-	renderDisplayList();
+	//Process REsults into renderable
+	m_d3dRenderer.BuildDisplayList(&m_sceneGraph);
+	//build the renderable chunk 
+	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
 
 }
 
@@ -335,6 +340,14 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.delPressed = false;
 	}
 
+	if (m_toolInputCommands.undoPressed && isUndoingLast == false)
+	{
+		isUndoingLast = true;
+		m_d3dRenderer.UndoObject(&m_sceneGraph);
+		renderDisplayList();
+		m_toolInputCommands.undoPressed = false;
+	}
+
 	//Renderer Update Call
 	m_d3dRenderer.Tick(&m_toolInputCommands);
 }
@@ -437,17 +450,17 @@ void ToolMain::UpdateInput(MSG * msg)
 	}
 	else m_toolInputCommands.rotLeft = false;
 
-	if (m_keyArray['Z'])
-	{
-		m_toolInputCommands.rotUp = true;
-	}
-	else m_toolInputCommands.rotUp = false;
+//	if (m_keyArray['Z'])
+//	{
+	//	m_toolInputCommands.rotUp = true;
+//	}
+//	else m_toolInputCommands.rotUp = false;
 
-	if (m_keyArray['X'])
-	{
-		m_toolInputCommands.rotDown = true;
-	}
-	else m_toolInputCommands.rotDown = false;
+//	if (m_keyArray['X'])
+//	{
+	//	m_toolInputCommands.rotDown = true;
+//	}
+//	else m_toolInputCommands.rotDown = false;
 
 	//Copy
 	if (m_keyArray[17] && m_keyArray['C'])
@@ -477,5 +490,16 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.delPressed = false;
 		isDeletingLast = false;
 	}
+
+	//undo
+	if (m_keyArray['Z'] && m_keyArray[VK_CONTROL])
+	{
+		m_toolInputCommands.undoPressed = true;
+	}
+	else {
+		m_toolInputCommands.undoPressed = false;
+		isUndoingLast = false;
+	}
+
 }
 

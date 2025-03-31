@@ -64,22 +64,22 @@ void Camera::Update(InputCommands* input)
 
 		if (input->mouseX > oldMouseX)
 		{
-			m_camOrientation.y += m_camRotRate * m_mouseSensitivity;
+			m_camOrientation.y += input->mouseX - oldMouseX;// m_camRotRate* m_mouseSensitivity;
 		}
 
 		if (input->mouseX < oldMouseX)
 		{
-			m_camOrientation.y -= m_camRotRate * m_mouseSensitivity;
+			m_camOrientation.y += input->mouseX - oldMouseX;//(m_camRotRate) * m_mouseSensitivity;
 		}
 
 		if (input->mouseY < oldMouseY)
 		{
-			m_camOrientation.x += m_camRotRate * m_mouseSensitivity;
+			m_camOrientation.x -= input->mouseY - oldMouseY;// m_camRotRate* m_mouseSensitivity;
 		}
 
 		if (input->mouseY > oldMouseY)
 		{
-			m_camOrientation.x -= m_camRotRate * m_mouseSensitivity;
+			m_camOrientation.x -= input->mouseY - oldMouseY;// m_camRotRate * m_mouseSensitivity;
 		}
 	}
 
