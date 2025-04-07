@@ -535,6 +535,7 @@ void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 		SceneObject newObject = copiedObject;
 		newObject.ID = sceneGraph->size() + 1;
 		newObject.posY = newObject.posY + pasteExtraSpace;
+		newObject.ID = GetNewID(sceneGraph);
 
 		sceneGraph->push_back(newObject);
 		undoObject.push_back(newObject);
@@ -571,6 +572,7 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 		{
 			SceneObject newObject = undoObject.back();
 			sceneGraph->push_back(newObject);
+			newObject.ID = GetNewID(sceneGraph);
 
 			undoObject.pop_back();
 			undoActions.pop_back();
@@ -587,8 +589,6 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 				}
 			}
 
-			
-
 			undoObject.pop_back();
 			undoActions.pop_back();
 		}
@@ -597,16 +597,17 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 
 int Game::GetNewID(std::vector<SceneObject>* sceneGraph)
 {
-//	int currentID;
-//	std::vector<int> usedIDs;
-//	for (int i = 0; i < sceneGraph->size();i++)
-//	{
-//		if (sceneGraph->at(i).ID == i)
-//		{
-//			usedIDs 
-//		}
-//	 }
-//	return 0;
+	//return the biggest unique ID so id shenanagins stop
+	int bigID = 0;
+	for (int i = 0; i < sceneGraph->size();i++)
+	{
+		if (sceneGraph->at(i).ID > bigID)
+		{
+			bigID = sceneGraph->at(i).ID;
+		}
+
+	}
+	return bigID+1;
 }
 
 #ifdef DXTK_AUDIO
