@@ -32,6 +32,8 @@ public:	//variables
 	int m_selectedObject;						//ID of current Selection
 	void	renderDisplayList();				//this is totally a variable, display objects
 
+	bool dontSelect;
+
 private:	//methods
 	void	onContentAdded();
 

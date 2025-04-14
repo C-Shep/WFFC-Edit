@@ -1,3 +1,4 @@
 ﻿  EditObject.cpp
   _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-  Win32SimpleSample.vcxproj -> C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe
+D:\WFFC\WFFC-Edit\WOFFCEdit\EditObject.cpp(103,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Win32SimpleSample.vcxproj -> D:\WFFC\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe

@@ -2,7 +2,8 @@
 #include "afxdialogex.h"
 #include "resource.h"
 #include "afxwin.h"
-#include "SceneObject.h"
+#include "SceneObject.h" 
+#include "ToolMain.h"
 #include <vector>
 
 // SelectDialogue dialog
@@ -15,7 +16,7 @@ public:
 	EditObject(CWnd* pParent, std::vector<SceneObject>* SceneGraph);   // modal // takes in out scenegraph in the constructor
 	EditObject(CWnd* pParent = NULL);
 	virtual ~EditObject();
-	void SetObjectData(std::vector<SceneObject>* SceneGraph, int* Selection);	//passing in pointers to the data the class will operate on.
+	void SetObjectData(ToolMain* toolMain, std::vector<SceneObject>* SceneGraph, int* Selection);	//passing in pointers to the data the class will operate on.
 
 	// Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -29,6 +30,7 @@ protected:
 
 	std::vector<SceneObject>* m_sceneGraph;
 	int* m_currentSelection;
+	ToolMain* tool;
 
 
 	DECLARE_MESSAGE_MAP()

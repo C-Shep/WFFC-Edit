@@ -8,7 +8,7 @@ IMPLEMENT_DYNAMIC(EditObject, CDialogEx)
 
 //Message map.  Just like MFCMAIN.cpp.  This is where we catch button presses etc and point them to a handy dandy method.
 BEGIN_MESSAGE_MAP(EditObject, CDialogEx)
-	ON_COMMAND(IDOK, &EditObject::End)					//ok button
+//	ON_COMMAND(IDOK, &EditObject::End)					//ok button
 	ON_BN_CLICKED(IDOK, &EditObject::OnBnClickedOk)
 	ON_COMMAND(IDCANCEL, &EditObject::End)
 END_MESSAGE_MAP()
@@ -30,10 +30,13 @@ EditObject::~EditObject()
 }
 
 ///pass through pointers to the data in the tool we want to manipulate
-void EditObject::SetObjectData(std::vector<SceneObject>* SceneGraph, int* selection)
+void EditObject::SetObjectData(ToolMain* toolMain, std::vector<SceneObject>* SceneGraph, int* selection)
 {
+	tool = toolMain;
 	m_sceneGraph = SceneGraph;
 	m_currentSelection = selection;
+
+	tool->dontSelect = true;
 
 }
 
@@ -63,42 +66,43 @@ BOOL EditObject::OnInitDialog()
 
 void EditObject::PostNcDestroy()
 {
+	CDialogEx::PostNcDestroy();
+	tool->dontSelect = false;
+	delete this;
 }
-
-// SelectDialogue message handlers callback   - We only need this if the dailogue is being setup-with createDialogue().  We are doing
-//it manually so its better to use the messagemap
-/*INT_PTR CALLBACK SelectProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg)
-	{
-	case WM_COMMAND:
-		switch (LOWORD(wParam))
-		{
-		case IDOK:
-		//	EndDialog(hwndDlg, wParam);
-			DestroyWindow(hwndDlg);
-			return TRUE;
-
-
-		case IDCANCEL:
-			EndDialog(hwndDlg, wParam);
-			return TRUE;
-			break;
-		}
-	}
-
-	return INT_PTR();
-}*/
-
 
 void EditObject::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
+	tool->dontSelect = false;
 
-	SceneObject obj;
+	if (!m_sceneGraph || !m_currentSelection) {
+		AfxMessageBox(L"Scene graph or selection is null!");
+		tool->dontSelect = false;
+		return;
+	}
+
+	int index = *m_currentSelection;
+
+	if (index < 0 || index >= m_sceneGraph->size()) {
+		AfxMessageBox(L"Selection index out of bounds!");
+		tool->dontSelect = false;
+		return;
+	}
+
+	SceneObject& obj = m_sceneGraph->at(index); // modify directly
+
 	obj = m_sceneGraph->at(*m_currentSelection);
 
-	//obj.posX =
+	int textNumber = 0;
+	wchar_t numberraw[20] = {0};
+
+	GetDlgItemText(IDC_X, numberraw, _countof(numberraw));
+
+	swscanf_s(numberraw, L"%d", &textNumber);
+
+	obj.posX = textNumber;
+
+	tool->renderDisplayList();
 
 	CDialogEx::OnOK();
 }

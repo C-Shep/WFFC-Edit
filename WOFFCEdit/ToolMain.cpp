@@ -30,6 +30,8 @@ ToolMain::ToolMain()
 	
 	isPastingLast = false;
 	isUndoingLast = false;
+
+	dontSelect = false;
 }
 
 
@@ -311,7 +313,7 @@ void ToolMain::Tick(MSG *msg)
 			//lock mouse to screen
 
 
-	if (m_toolInputCommands.mouseLBDown)
+	if (m_toolInputCommands.mouseLBDown && dontSelect == false)
 	{
 		m_selectedObject = m_d3dRenderer.MousePicking();
 		m_toolInputCommands.mouseLBDown = false;

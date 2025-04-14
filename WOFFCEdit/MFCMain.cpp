@@ -112,9 +112,11 @@ void MFCMain::ToolBarButton1()
 
 void MFCMain::MenuEditObject()
 {
-	m_ToolEditDialogue.Create(IDD_OBPROP);	//Start up modeless
-	m_ToolEditDialogue.ShowWindow(SW_SHOW);	//show modeless
-	m_ToolEditDialogue.SetObjectData(&m_ToolSystem.m_sceneGraph, &m_ToolSystem.m_selectedObject);
+	EditObject* m_editObjDlg = new EditObject();
+
+	m_editObjDlg->Create(IDD_OBPROP);	//Start up modeless
+	m_editObjDlg->ShowWindow(SW_SHOW);	//show modeless
+	m_editObjDlg->SetObjectData(&m_ToolSystem, &m_ToolSystem.m_sceneGraph, &m_ToolSystem.m_selectedObject);
 }
 
 
