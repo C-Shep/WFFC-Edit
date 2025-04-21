@@ -80,6 +80,39 @@ void ToolMain::renderDisplayList()
 	m_d3dRenderer.BuildDisplayChunk(&m_chunk);
 }
 
+void ToolMain::addUndo()
+{
+	m_undoVector.push_back(m_sceneGraph);
+	m_redoVector.clear();
+}
+
+void ToolMain::addRedo()
+{
+
+}
+
+void ToolMain::Undo()
+{
+	if (!m_undoVector.empty())
+	{
+		m_redoVector.push_back(m_sceneGraph);
+		m_sceneGraph = m_undoVector.back();
+		renderDisplayList();
+		m_undoVector.pop_back();
+	}
+}
+
+void ToolMain::Redo()
+{
+	if (!m_redoVector.empty())
+	{
+		m_undoVector.push_back(m_sceneGraph);
+		m_sceneGraph = m_redoVector.back();
+		renderDisplayList();
+		m_redoVector.pop_back();
+	}
+}
+
 void ToolMain::onActionLoad()
 {
 	//load current chunk and objects into lists

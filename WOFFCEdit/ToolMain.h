@@ -8,7 +8,6 @@
 #include "InputCommands.h"
 #include <vector>
 
-
 class ToolMain
 {
 public: //methods
@@ -32,6 +31,11 @@ public:	//variables
 	int m_selectedObject;						//ID of current Selection
 	void	renderDisplayList();				//this is totally a variable, display objects
 
+	void addUndo();
+	void addRedo();
+	void Undo();
+	void Redo();
+
 	bool dontSelect;
 
 private:	//methods
@@ -54,5 +58,8 @@ private:	//variables
 	bool isPastingLast;
 	bool isDeletingLast;
 	bool isUndoingLast;
-	
+
+	//undo redo
+	std::vector<std::vector<SceneObject>> m_undoVector;
+	std::vector<std::vector<SceneObject>> m_redoVector;
 };

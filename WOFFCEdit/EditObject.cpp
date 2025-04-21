@@ -38,6 +38,37 @@ void EditObject::SetObjectData(ToolMain* toolMain, std::vector<SceneObject>* Sce
 
 	tool->dontSelect = true;
 
+	if (!m_sceneGraph || !m_currentSelection) {
+		AfxMessageBox(L"Scene graph or selection is null!");
+		tool->dontSelect = false;
+		return;
+	}
+
+	int index = *m_currentSelection;
+
+	if (index < 0 || index >= m_sceneGraph->size()) {
+		AfxMessageBox(L"Selection index out of bounds!");
+		tool->dontSelect = false;
+		return;
+	}
+
+	SceneObject& obj = m_sceneGraph->at(index); // modify directly
+
+	obj = m_sceneGraph->at(*m_currentSelection);
+
+	wchar_t XobjPos[20] = L"";
+	swprintf_s(XobjPos,L"%f",obj.posX);
+	SetDlgItemText(IDC_X, XobjPos);
+
+	wchar_t YobjPos[20] = L"";
+	swprintf_s(YobjPos, L"%f", obj.posY);
+	SetDlgItemText(IDC_Y, YobjPos);
+
+	wchar_t ZobjPos[20] = L"";
+	swprintf_s(ZobjPos, L"%f", obj.posZ);
+	SetDlgItemText(IDC_Z, ZobjPos);
+
+
 }
 
 
@@ -93,14 +124,27 @@ void EditObject::OnBnClickedOk()
 
 	obj = m_sceneGraph->at(*m_currentSelection);
 
-	int textNumber = 0;
-	wchar_t numberraw[20] = {0};
+	//------------------Position------------------
+	//X Pos
+	int XtextNumber = 0;
+	wchar_t Xnumberraw[20] = {0};
+	GetDlgItemText(IDC_X, Xnumberraw, _countof(Xnumberraw));
+	swscanf_s(Xnumberraw, L"%d", &XtextNumber);
+	obj.posX = XtextNumber;
 
-	GetDlgItemText(IDC_X, numberraw, _countof(numberraw));
+	//Y Pos
+	int YtextNumber = 0;
+	wchar_t Ynumberraw[20] = { 0 };
+	GetDlgItemText(IDC_Y, Ynumberraw, _countof(Ynumberraw));
+	swscanf_s(Ynumberraw, L"%d", &YtextNumber);
+	obj.posY = YtextNumber;
 
-	swscanf_s(numberraw, L"%d", &textNumber);
-
-	obj.posX = textNumber;
+	//Z Pos
+	int ZtextNumber = 0;
+	wchar_t Znumberraw[20] = { 0 };
+	GetDlgItemText(IDC_Z, Znumberraw, _countof(Znumberraw));
+	swscanf_s(Znumberraw, L"%d", &ZtextNumber);
+	obj.posZ = ZtextNumber;
 
 	tool->renderDisplayList();
 

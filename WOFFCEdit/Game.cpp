@@ -1,10 +1,11 @@
 //
 // Game.cpp
 //
-
+#include "ToolMain.h"
 #include "pch.h"
 #include "Game.h"
 #include "DisplayObject.h"
+
 #include <string>
 
 using namespace DirectX;
@@ -532,18 +533,20 @@ void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 {
 	if (hasCopiedAnObject)
 	{
+		toolMain->addUndo();
+
 		SceneObject newObject = copiedObject;
 		newObject.ID = sceneGraph->size() + 1;
 		newObject.posY = newObject.posY + pasteExtraSpace;
 		newObject.ID = GetNewID(sceneGraph);
 
 		sceneGraph->push_back(newObject);
-		undoObject.push_back(newObject);
-		undoActions.push_back(1);
+		//undoObject.push_back(newObject);
+		//undoActions.push_back(1);
 
 		pasteExtraSpace += 3.f;
-		hasUndoableObjectCreate = true;
-		hasUndoableObjectDelete = false;
+		//hasUndoableObjectCreate = true;
+		//hasUndoableObjectDelete = false;
 	}
 
 }
@@ -553,10 +556,8 @@ void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
 	//SceneObject objectToDelete;
 	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
-		undoObject.push_back(sceneGraph->at(selectedID));
-		undoActions.push_back(0);
-		hasUndoableObjectDelete = true;
-		hasUndoableObjectCreate = false;
+		toolMain->addUndo();
+
 		//objectToDelete = sceneGraph->at(selectedID);
 		sceneGraph->erase(sceneGraph->begin()+selectedID);
 	}
@@ -565,7 +566,7 @@ void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
 
 void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 {
-	//if last action was delete, undo delete and create object
+/*	//if last action was delete, undo delete and create object
 	if (!undoActions.empty())
 	{
 		if (undoActions.back() == 0)
@@ -592,7 +593,8 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 			undoObject.pop_back();
 			undoActions.pop_back();
 		}
-	}
+	}*/
+	toolMain->Undo();
 }
 
 int Game::GetNewID(std::vector<SceneObject>* sceneGraph)
