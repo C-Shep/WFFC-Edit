@@ -1,18 +1,98 @@
-﻿  Game.cpp
+﻿  Camera.cpp
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Camera.cpp(10,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Camera.cpp(115,65): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Camera.cpp(116,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Camera.cpp(117,66): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  ChunkObject.cpp
+  DeviceResources.cpp
+  DisplayChunk.cpp
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(14,27): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(15,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(73,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(74,185): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(74,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(94,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(152,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(174,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,30): warning C4101: 'index4': unreferenced local variable
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,14): warning C4101: 'index2': unreferenced local variable
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,22): warning C4101: 'index3': unreferenced local variable
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(189,6): warning C4101: 'index1': unreferenced local variable
+  DisplayObject.cpp
+  EditObject.cpp
   _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(27,16): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(229,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(239,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(238,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(237,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(223,10): warning C4101: 'Buffer': unreferenced local variable
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(375,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(487,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(486,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(485,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(494,110): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(494,84): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(495,109): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(495,83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
-C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\Game.cpp(539,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Win32SimpleSample.vcxproj -> C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\Project\ProjectWFFC\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(160,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(167,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(174,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(182,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(189,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(196,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(204,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(211,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\EditObject.cpp(218,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(27,16): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(224,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(234,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(233,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(232,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(257,10): warning C4101: 'Buffer': unreferenced local variable
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(379,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(491,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(490,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(489,46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(498,110): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(498,84): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(499,109): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(499,83): warning C4244: 'argument': conversion from 'LONG' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\Game.cpp(543,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Main.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+  MFCFrame.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+  MFCRenderFrame.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+  pch.cpp
+  MFCMain.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+  SceneObject.cpp
+  SelectDialogue.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\SelectDialogue.cpp(41,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  ToolMain.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(145,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(146,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(147,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(148,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(149,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(150,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(151,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(152,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(153,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(165,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(166,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(167,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(171,48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(172,47): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(173,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(177,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(178,50): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(188,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(189,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(190,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(191,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(192,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(193,58): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(194,59): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(195,56): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(196,54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(197,57): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(257,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(407,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\ToolMain.cpp(408,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  sqlite3.c
+C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\sqlite3.c(29693,7): warning C4996: 'GetVersionExW': was declared deprecated
+  Win32SimpleSample.vcxproj -> C:\Users\2101007\OneDrive - Abertay University\Documents\CMP405\ProjectReal\WFFC-Edit\WOFFCEdit\x64\Debug\WoFEdit.exe

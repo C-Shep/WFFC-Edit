@@ -352,14 +352,14 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.mouseLBDown = false;
 	}
 
-	if (m_selectedObject != -1 && m_toolInputCommands.copyPressed && isCopyingLast == false)
+	if (m_selectedObject != -1 && m_toolInputCommands.copyPressed && isCopyingLast == false && dontSelect == false)
 	{
 		isCopyingLast = true;
 		m_d3dRenderer.CopyObject(&m_sceneGraph);
 		m_toolInputCommands.copyPressed = false;
 	}
 
-	if (m_toolInputCommands.pastePressed && isPastingLast == false)
+	if (m_toolInputCommands.pastePressed && isPastingLast == false && dontSelect == false)
 	{
 		isPastingLast = true;
 		m_d3dRenderer.PasteObject(&m_sceneGraph);
@@ -367,7 +367,7 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.pastePressed = false;
 	}
 
-	if (m_toolInputCommands.delPressed && isDeletingLast == false)
+	if (m_toolInputCommands.delPressed && isDeletingLast == false && dontSelect == false)
 	{
 		isDeletingLast = true;
 		m_d3dRenderer.DeleteObject(&m_sceneGraph);
@@ -375,7 +375,7 @@ void ToolMain::Tick(MSG *msg)
 		m_toolInputCommands.delPressed = false;
 	}
 
-	if (m_toolInputCommands.undoPressed && isUndoingLast == false)
+	if (m_toolInputCommands.undoPressed && isUndoingLast == false && dontSelect == false)
 	{
 		isUndoingLast = true;
 		m_d3dRenderer.UndoObject(&m_sceneGraph);
@@ -432,6 +432,10 @@ void ToolMain::UpdateInput(MSG * msg)
 		//set some flag for the mouse button in inputcommands
 		
 		m_toolInputCommands.mouseRBDown = false;
+		break;
+
+	case WM_MOUSEWHEEL:
+
 		break;
 	}
 	//here we update all the actual app functionality that we want.  This information will either be used in toolmain, or sent down to the renderer (Camera movement etc)
