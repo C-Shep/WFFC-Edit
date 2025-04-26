@@ -601,6 +601,11 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 	toolMain->Undo();
 }
 
+void Game::RedoObject(std::vector<SceneObject>* sceneGraph)
+{
+	toolMain->Redo();
+}
+
 int Game::GetNewID(std::vector<SceneObject>* sceneGraph)
 {
 	//return the biggest unique ID so id shenanagins stop

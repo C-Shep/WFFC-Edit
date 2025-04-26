@@ -27,7 +27,8 @@ ToolMain::ToolMain()
 	m_toolInputCommands.copyPressed = false;
 	m_toolInputCommands.delPressed = false;
 	m_toolInputCommands.undoPressed = false;
-	
+	m_toolInputCommands.redoPressed = false;
+
 	isPastingLast = false;
 	isUndoingLast = false;
 
@@ -378,9 +379,20 @@ void ToolMain::Tick(MSG *msg)
 	if (m_toolInputCommands.undoPressed && isUndoingLast == false && dontSelect == false)
 	{
 		isUndoingLast = true;
-		m_d3dRenderer.UndoObject(&m_sceneGraph);
+		//m_d3dRenderer.UndoObject(&m_sceneGraph);
+		Undo();
 		renderDisplayList();
 		m_toolInputCommands.undoPressed = false;
+	}
+
+	if (m_toolInputCommands.redoPressed && isRedoingLast == false && dontSelect == false)
+	{
+		isRedoingLast = true;
+		//m_d3dRenderer.RedoObject(&m_sceneGraph);
+		Redo();
+		renderDisplayList();
+		
+		m_toolInputCommands.redoPressed = false;
 	}
 
 	//Renderer Update Call
@@ -540,5 +552,13 @@ void ToolMain::UpdateInput(MSG * msg)
 		isUndoingLast = false;
 	}
 
+	if (m_keyArray['Y'] && m_keyArray[VK_CONTROL])
+	{
+		m_toolInputCommands.redoPressed = true;
+	}
+	else {
+		m_toolInputCommands.redoPressed = false;
+		isRedoingLast = false;
+	}
 }
 

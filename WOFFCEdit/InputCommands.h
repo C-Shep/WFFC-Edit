@@ -24,6 +24,7 @@ struct InputCommands
 	bool pastePressed;
 	bool delPressed;
 	bool undoPressed;
+	bool redoPressed;
 	bool leftArrowPressed;
 	bool upArrowPressed;
 	bool rightArrowPressed;

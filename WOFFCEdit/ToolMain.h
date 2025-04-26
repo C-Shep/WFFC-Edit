@@ -58,6 +58,7 @@ private:	//variables
 	bool isPastingLast;
 	bool isDeletingLast;
 	bool isUndoingLast;
+	bool isRedoingLast;
 
 	//undo redo
 	std::vector<std::vector<SceneObject>> m_undoVector;

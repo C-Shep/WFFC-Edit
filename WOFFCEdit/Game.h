@@ -62,6 +62,7 @@ public:
 	void PasteObject(std::vector<SceneObject>* sceneGraph);
 	void DeleteObject(std::vector<SceneObject>* sceneGraph);
 	void UndoObject(std::vector<SceneObject>* sceneGraph);
+	void RedoObject(std::vector<SceneObject>* sceneGraph);
 
 	int GetNewID(std::vector<SceneObject>* sceneGraph);
 
