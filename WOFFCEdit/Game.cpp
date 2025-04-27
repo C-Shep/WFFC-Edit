@@ -63,6 +63,8 @@ Game::Game()
 
 	hasUndoableObjectDelete = false;
 	hasUndoableObjectCreate = false;
+
+	pasteExtraSpaceBase = 3.f;
 }
 
 Game::~Game()
@@ -525,30 +527,39 @@ int Game::MousePicking()
 
 void Game::CopyObject(const std::vector<SceneObject>* sceneGraph)
 {
+	//if valid ID
 	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
+		//set copied obj to selected one
 		copiedObject = sceneGraph->at(selectedID);
+
+		//set copied to true for paste check
 		hasCopiedAnObject = true;
-		pasteExtraSpace = 3.f;
+
+		//set paste space to default 
+		pasteExtraSpace = pasteExtraSpaceBase;
 	}
 }
 
 void Game::PasteObject(std::vector<SceneObject>* sceneGraph)
 {
+	//if an object has been copied
 	if (hasCopiedAnObject)
 	{
+		//set this as an undoable action
 		toolMain->addUndo();
 
-		SceneObject newObject = copiedObject;
+		//create new object with copied attributes
+		SceneObject newObject = copiedObject;	
 		newObject.ID = sceneGraph->size() + 1;
-		newObject.posY = newObject.posY + pasteExtraSpace;
-		newObject.ID = GetNewID(sceneGraph);
+		newObject.posY = newObject.posY + pasteExtraSpace;	//move it up some
+		newObject.ID = GetNewID(sceneGraph);				//set ID to unique ID
 
-		sceneGraph->push_back(newObject);
+		sceneGraph->push_back(newObject);					//add new obj to scene graph
 		//undoObject.push_back(newObject);
 		//undoActions.push_back(1);
 
-		pasteExtraSpace += 3.f;
+		pasteExtraSpace += pasteExtraSpaceBase;	//make paste space 3 higher so it always goes ontop of previous object
 		//hasUndoableObjectCreate = true;
 		//hasUndoableObjectDelete = false;
 	}
@@ -560,14 +571,15 @@ void Game::DeleteObject(std::vector<SceneObject>* sceneGraph)
 	//SceneObject objectToDelete;
 	if (selectedID >= 0 && selectedID < sceneGraph->size())
 	{
-		toolMain->addUndo();
+		toolMain->addUndo();	//set ans undoable action
 
 		//objectToDelete = sceneGraph->at(selectedID);
-		sceneGraph->erase(sceneGraph->begin()+selectedID);
+		sceneGraph->erase(sceneGraph->begin()+selectedID);	//remove object from scene graph, destroying it
 	}
 	selectedID = -2; //the ground is -1 so -2 to be safe
 }
 
+//not needed anymore
 void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 {
 /*	//if last action was delete, undo delete and create object
@@ -601,15 +613,19 @@ void Game::UndoObject(std::vector<SceneObject>* sceneGraph)
 	toolMain->Undo();
 }
 
+//also not needed anymore
 void Game::RedoObject(std::vector<SceneObject>* sceneGraph)
 {
 	toolMain->Redo();
 }
 
+//returns a new ID for unique IDs among new objects
 int Game::GetNewID(std::vector<SceneObject>* sceneGraph)
 {
 	//return the biggest unique ID so id shenanagins stop
 	int bigID = 0;
+
+	//max algorithm for unique ID
 	for (int i = 0; i < sceneGraph->size();i++)
 	{
 		if (sceneGraph->at(i).ID > bigID)

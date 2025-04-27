@@ -69,6 +69,7 @@ public:
 	SceneObject copiedObject;
 	bool hasCopiedAnObject;
 	float pasteExtraSpace;
+	float pasteExtraSpaceBase;
 
 	std::vector<SceneObject> undoObject;
 	std::vector<int> undoActions;		//0 = delete, 1 = create
